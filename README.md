@@ -33,3 +33,12 @@ Issue 01 is Neil Neil's Mystic Peel; later issues can use different concepts wit
 - Enlarged the palm-reader presentation on mobile by reducing unused side margins.
 - Added a clear five-colour legend underneath the palm so the key remains readable on phones.
 - Preserved all 26 interactive hotspots and Issue 01 content.
+
+## Issue 01 v1.2 update
+
+- Preserved all 26 original palm hotspots and their existing information.
+- Replaced the small lower legend with five large circular line buttons.
+- Challenge, Community, Fitness, Adventure and Future buttons are now tappable.
+- Each large line button opens the corresponding existing line information from Neil's hotspot data using the same modal as the palm.
+- Enlarged the “26 TAPPABLE POINTS” message for mobile.
+- No individual hotspot copy or category data was removed or rewritten.

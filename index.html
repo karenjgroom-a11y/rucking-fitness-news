@@ -208,54 +208,85 @@
     border-radius: 16px;
     margin-top: 18px;
   }
-
-  .legend{
-    display:grid;
-    grid-template-columns:repeat(5,minmax(0,1fr));
-    gap:8px;
-    margin:14px 2px 0;
-  }
-
-  .legend-item{
-    min-width:0;
-    border-radius:12px;
-    padding:10px 6px;
-    background:rgba(255,255,255,0.045);
-    border:1px solid rgba(255,255,255,0.08);
-    text-align:center;
-    font-size:11px;
-    line-height:1.25;
-    color:#d7dbcb;
-    font-weight:600;
-  }
-
-  .legend-dot{
-    display:block;
-    width:15px;
-    height:15px;
-    border-radius:50%;
-    margin:0 auto 6px;
-    background:var(--legend-color);
-    box-shadow:0 0 0 2px rgba(255,255,255,0.78);
-  }
-
-  footer.hint{
-    margin-top:13px;
-    padding:0 10px;
-    line-height:1.45;
-  }
-
-  @media (max-width: 520px){
-    .wrap{ padding-left:6px; padding-right:6px; }
-    header{ padding:0 8px; }
-    .legend{
-      grid-template-columns:repeat(5,minmax(54px,1fr));
-      gap:5px;
-    }
     .legend-item{
       padding:9px 3px;
       font-size:9.5px;
     }
+  }
+
+
+  /* --- Large tappable line navigation --- */
+  .line-nav{
+    display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:10px;
+    margin:18px 2px 0;
+  }
+
+  .line-nav-btn{
+    appearance:none;
+    -webkit-appearance:none;
+    border:2px solid rgba(255,255,255,0.88);
+    border-radius:50%;
+    aspect-ratio:1 / 1;
+    width:100%;
+    min-width:0;
+    padding:8px 4px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#fff;
+    font-family:'Anton',sans-serif;
+    font-size:clamp(10px,2.8vw,16px);
+    line-height:1.05;
+    letter-spacing:.01em;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,.24);
+    transition:transform .14s ease, filter .14s ease;
+  }
+
+  .line-nav-btn:active{ transform:scale(.96); }
+  .line-nav-btn:hover{ filter:brightness(1.06); }
+
+  .line-nav-btn small{
+    display:block;
+    font-family:'Inter',sans-serif;
+    font-size:.72em;
+    font-weight:700;
+    margin-top:3px;
+    letter-spacing:.02em;
+  }
+
+  .line-challenge{ background:#D9453B; }
+  .line-community{ background:#3FA34D; }
+  .line-fitness{ background:#2F80C4; }
+  .line-adventure{ background:#9354C9; }
+  .line-future{ background:#E0A82E; color:#17140c; }
+
+  footer.hint{
+    margin-top:18px;
+    font-family:'Anton',sans-serif;
+    font-size:clamp(20px,5.5vw,30px);
+    line-height:1.05;
+    letter-spacing:.02em;
+    color:var(--cream);
+  }
+
+  footer.hint .hint-sub{
+    display:block;
+    margin-top:6px;
+    font-family:'Inter',sans-serif;
+    font-size:clamp(12px,3.2vw,16px);
+    font-weight:600;
+    letter-spacing:.05em;
+    color:#aeb5a5;
+  }
+
+  @media (max-width:520px){
+    .line-nav{ gap:5px; margin-left:0; margin-right:0; }
+    .line-nav-btn{ border-width:1.5px; padding:5px 2px; }
   }
 
 </style>
@@ -272,15 +303,15 @@
     <img src="assets/palm-reader.jpg" alt="Rucking Fitness hand infographic">
   </div>
 
-  <div class="legend" aria-label="Palm reader colour key">
-    <div class="legend-item"><span class="legend-dot" style="--legend-color:#D9453B"></span>Challenge<br>Line</div>
-    <div class="legend-item"><span class="legend-dot" style="--legend-color:#3FA34D"></span>Community<br>Line</div>
-    <div class="legend-item"><span class="legend-dot" style="--legend-color:#2F80C4"></span>Fitness<br>Line</div>
-    <div class="legend-item"><span class="legend-dot" style="--legend-color:#9354C9"></span>Adventure<br>Line</div>
-    <div class="legend-item"><span class="legend-dot" style="--legend-color:#E0A82E"></span>Future<br>Line</div>
-  </div>
+  <nav class="line-nav" aria-label="Explore the five palm lines">
+    <button class="line-nav-btn line-challenge" type="button" onclick="openLineInfo('challenge')">CHALLENGE<small>LINE</small></button>
+    <button class="line-nav-btn line-community" type="button" onclick="openLineInfo('community')">COMMUNITY<small>LINE</small></button>
+    <button class="line-nav-btn line-fitness" type="button" onclick="openLineInfo('fitness')">FITNESS<small>LINE</small></button>
+    <button class="line-nav-btn line-adventure" type="button" onclick="openLineInfo('adventure')">ADVENTURE<small>LINE</small></button>
+    <button class="line-nav-btn line-future" type="button" onclick="openLineInfo('future')">FUTURE<small>LINE</small></button>
+  </nav>
 
-  <footer class="hint">26 tappable points &mdash; colour-coded to the five lines on the palm</footer>
+  <footer class="hint">26 TAPPABLE POINTS<span class="hint-sub">COLOUR-CODED TO THE FIVE LINES ON THE PALM</span></footer>
 </div>
 
 <div class="overlay" id="overlay">
@@ -311,6 +342,23 @@
   const cardTitle = document.getElementById('cardTitle');
   const cardMeta = document.getElementById('cardMeta');
   const cardBody = document.getElementById('cardBody');
+
+  
+  const lineInfoTitles = {
+    challenge: "The Challenge Line",
+    community: "The Community Line",
+    fitness: "The Fitness Line",
+    adventure: "The Adventure Line",
+    future: "The Future Line"
+  };
+
+  function openLineInfo(category){
+    const title = lineInfoTitles[category];
+    const item = hotspots.find(h => h.cat === category && h.title === title)
+      || hotspots.find(h => h.cat === category && /line/i.test(h.title));
+    if(!item) return;
+    openCard(item);
+  }
 
   hotspots.forEach(h => {
     const btn = document.createElement('button');
