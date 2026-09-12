@@ -1,0 +1,273 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Rucking Fitness News · Issue 01 — Neil Neil's Mystic Peel. Tap the palm to explore challenges, community, fitness, adventures and what comes next.">
+<meta name="theme-color" content="#10130f">
+<title>Rucking Fitness News · Issue 01 — Neil Neil's Mystic Peel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #10130f;
+    --bg-2: #171b15;
+    --orange: #E8722C;
+    --orange-light: #F2955A;
+    --cream: #F4EFE4;
+    --challenge: #D9453B;
+    --community: #3FA34D;
+    --fitness: #2F80C4;
+    --adventure: #9354C9;
+    --future: #E0A82E;
+    --card: #1c211a;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0; padding:0;
+    background: radial-gradient(circle at 50% -10%, #232920 0%, var(--bg) 55%, #0a0c09 100%);
+    color: var(--cream);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+  }
+  .wrap{
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 28px 16px 48px;
+  }
+  header{
+    text-align:center;
+    margin-bottom: 18px;
+  }
+  header .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    color: var(--orange-light);
+    font-weight:600;
+    margin: 0 0 6px;
+  }
+  header h1{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size: clamp(30px, 8vw, 42px);
+    letter-spacing: 0.01em;
+    margin: 0;
+    line-height: 0.95;
+    color: var(--cream);
+  }
+  header h1 span{ color: var(--orange); }
+  header p.sub{
+    margin: 10px auto 0;
+    max-width: 420px;
+    font-size: 14.5px;
+    color: #b9c0ae;
+    line-height: 1.5;
+  }
+  .hand-stage{
+    position: relative;
+    width: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.65), 0 0 0 1px rgba(232,114,44,0.15);
+    margin-top: 22px;
+  }
+  .hand-stage img{
+    display:block;
+    width: 100%;
+    height: auto;
+  }
+  .hotspot{
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    background: transparent;
+  }
+  .hotspot .dot{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    background: var(--dot-color, var(--orange));
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.85), 0 2px 6px rgba(0,0,0,0.45);
+    transition: transform 0.15s ease;
+  }
+  .hotspot .ring{
+    position:absolute;
+    inset:-8px;
+    border-radius:50%;
+    border: 2px solid var(--dot-color, var(--orange));
+    opacity: 0.55;
+    animation: pulse 2.2s ease-out infinite;
+  }
+  .hotspot:hover .dot{ transform: scale(1.25); }
+  @keyframes pulse{
+    0%{ transform: scale(0.7); opacity: 0.65; }
+    80%{ transform: scale(1.9); opacity: 0; }
+    100%{ opacity: 0; }
+  }
+  footer.hint{
+    text-align:center;
+    margin-top: 16px;
+    font-size: 12.5px;
+    color: #7c8471;
+  }
+
+  /* Modal */
+  .overlay{
+    position: fixed; inset:0;
+    background: rgba(6,8,5,0.72);
+    backdrop-filter: blur(2px);
+    display:flex; align-items:flex-end; justify-content:center;
+    opacity:0; pointer-events:none;
+    transition: opacity 0.22s ease;
+    z-index: 50;
+    padding: 0;
+  }
+  .overlay.open{ opacity:1; pointer-events:auto; }
+  .card{
+    width: 100%;
+    max-width: 520px;
+    max-height: 82vh;
+    overflow-y: auto;
+    background: var(--card);
+    border-radius: 20px 20px 0 0;
+    border-top: 5px solid var(--accent, var(--orange));
+    padding: 26px 24px 30px;
+    transform: translateY(30px);
+    transition: transform 0.25s cubic-bezier(.2,.9,.3,1.2);
+    box-shadow: 0 -20px 50px rgba(0,0,0,0.5);
+    -webkit-overflow-scrolling: touch;
+  }
+  .card::-webkit-scrollbar{ width: 6px; }
+  .card::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.15); border-radius: 3px; }
+  .overlay.open .card{ transform: translateY(0); }
+  @media (min-width: 640px){
+    .overlay{ align-items:center; }
+    .card{ border-radius: 20px; border-top: 5px solid var(--accent, var(--orange)); }
+  }
+  .card .tag{
+    display:inline-block;
+    font-size: 11.5px;
+    font-weight:700;
+    letter-spacing: 0.08em;
+    color: var(--accent, var(--orange));
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .card h2{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size: 26px;
+    margin: 0 0 4px;
+    line-height: 1.08;
+    color: var(--cream);
+  }
+  .card .meta{
+    font-size: 13.5px;
+    color: var(--accent, var(--orange-light));
+    font-weight:600;
+    margin: 0 0 14px;
+  }
+  .card p.body{
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #d7dbcb;
+    margin: 0 0 22px;
+  }
+  .card button.close{
+    display:block;
+    width:100%;
+    background: var(--accent, var(--orange));
+    color: #14170f;
+    border:none;
+    border-radius: 10px;
+    padding: 13px 0;
+    font-size: 15px;
+    font-weight:700;
+    cursor:pointer;
+    font-family:'Inter',sans-serif;
+  }
+  .card button.close:hover{ filter: brightness(1.08); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">RUCKING FITNESS NEWS · ISSUE 01</p>
+    <h1>Palm <span>Reader</span></h1>
+    <p class="sub">Neil Neil's Mystic Peel &mdash; tap the hand to reveal what each marker means.</p>
+  </header>
+
+  <div class="hand-stage" id="stage">
+    <img src="assets/palm-reader.jpg" alt="Rucking Fitness hand infographic">
+  </div>
+
+  <footer class="hint">26 tappable points &mdash; colour-coded to the five lines on the palm</footer>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="card" id="card">
+    <p class="tag" id="cardTag"></p>
+    <h2 id="cardTitle"></h2>
+    <p class="meta" id="cardMeta"></p>
+    <p class="body" id="cardBody"></p>
+    <button class="close" id="cardClose">Got it</button>
+  </div>
+</div>
+
+<script>
+  const hotspots = [{"x": 36.0, "y": 9.0, "cat": "challenge", "title": "Ben Nevis", "meta": "12 Weeks", "body": "Scotland's Ben Nevis is the UK's highest mountain at 1,345m. Most walkers go up and down the Mountain Track (the old \u201cTourist Path\u201d) \u2014 roughly 17km round trip with about 1,350m of ascent, typically taking 7\u201310 hours. As a rucking target it's the benchmark peak: big vertical gain, changeable weather even in summer, and a real test of pack-carrying endurance. The 12-week window points to a steady build of long weekend rucks and hill-strength work rather than a rushed attempt \u2014 legs, lungs and feet all need time to adapt to sustained climbing under load."}, {"x": 36.0, "y": 16.5, "cat": "challenge", "title": "Snowdon", "meta": "10 Weeks", "body": "Snowdon (Yr Wyddfa) is Wales' highest mountain at 1,085m, with several routes up \u2014 the Llanberis Path is the longest but gentlest, while the Pyg Track and Miner's Track are shorter but rockier and more exposed. It's often used as a step below Ben Nevis: still a full mountain day with real elevation gain, but slightly less brutal logistically. A 10-week lead-in usually means building consistent rucking mileage and getting comfortable on uneven, rocky terrain before tackling it."}, {"x": 36.0, "y": 24.0, "cat": "challenge", "title": "Scafell Pike", "meta": "10 Weeks", "body": "Scafell Pike, England's highest peak at 978m, sits deep in the Lake District. It's shorter in height than Ben Nevis or Snowdon but the terrain is notably rough and rocky underfoot, especially near the summit, which makes it demanding on ankles and balance when carrying a loaded ruck. Together with Ben Nevis and Snowdon it forms the UK's National Three Peaks. The 10-week prep mirrors Snowdon's \u2014 focused on terrain confidence and load-carrying stamina."}, {"x": 36.0, "y": 32.0, "cat": "challenge", "title": "Three Peaks", "meta": "20 Weeks", "body": "The Three Peaks Challenge means climbing Ben Nevis, Snowdon and Scafell Pike back-to-back, traditionally within 24 hours including the long drives between Scotland, Wales and the Lake District. It totals around 23 miles of walking and over 3,000m of combined ascent on almost no sleep. A 20-week programme reflects just how much this asks of the body \u2014 it isn't just three hard hikes, it's three hard hikes stacked with sleep deprivation and long stretches in a vehicle in between, so both physical conditioning and pacing/logistics planning matter."}, {"x": 51.5, "y": 5.0, "cat": "fitness", "title": "Fan Dance", "meta": "16 Weeks", "body": "The Fan Dance is a legendary timed route march over Pen y Fan in the Brecon Beacons, historically used as a British Army/Special Forces selection test. The \u201cdouble\u201d version covers the route there and back, carrying a weighted pack (often 35lb/16kg or more) plus rifle-weight equivalent for military candidates. As a civilian fitness goal it represents peak rucking performance \u2014 sustained pace on steep gradient, under load, against the clock. A 16-week build is the longest of the finger's programmes for good reason: it layers strength, load-carriage and pace work in stages rather than all at once."}, {"x": 51.5, "y": 15.0, "cat": "fitness", "title": "Skip Rope Mastery", "meta": "6 Weeks", "body": "A focused 6-week block on jump-rope work \u2014 building footwork, coordination, rhythm and a cheap, highly portable form of cardio conditioning that complements rucking well (it trains a different kind of aerobic capacity and lower-leg resilience than walking under load does). Programmes like this typically progress from basic single-bounce skipping through to faster double-unders and interval-style sets over the six weeks."}, {"x": 51.5, "y": 23.0, "cat": "fitness", "title": "Weight Loss", "meta": "12 Weeks", "body": "A 12-week structured programme pairing regular rucking sessions and strength work with nutrition guidance, aimed at a sustainable rate of fat loss rather than a crash approach. Rucking is particularly well suited to this goal because it burns meaningfully more calories than walking at the same pace (thanks to the added load) while staying lower-impact than running."}, {"x": 51.5, "y": 30.0, "cat": "fitness", "title": "Get Lean", "meta": "12 Weeks", "body": "Also a 12-week phase, but the emphasis shifts from general weight loss to body composition \u2014 reducing body fat percentage while actively preserving (or building) muscle, typically through a mix of resistance training, rucking, and closer attention to protein intake."}, {"x": 51.5, "y": 37.0, "cat": "fitness", "title": "Build Muscle", "meta": "12 Weeks", "body": "A 12-week strength-focused block built around progressive resistance training, designed to increase muscle mass and overall strength that then carries over into stronger, more efficient rucking \u2014 particularly through the legs, glutes, back and core, which do most of the work carrying a loaded pack."}, {"x": 65.5, "y": 9.0, "cat": "adventure", "title": "Yomp Events", "meta": "", "body": "\u201cYomp\u201d is British (originally Royal Marines) slang for a long-distance march carrying a loaded pack, popularised during the Falklands War. Yomp Events here are organised group route-marches \u2014 typically longer, harder days out than a standard local ruck, run as a shared event so the difficulty is offset by camaraderie and pacing off other people."}, {"x": 65.5, "y": 21.0, "cat": "adventure", "title": "South Downs", "meta": "20\u201330km Monthly", "body": "A recurring monthly ruck along the South Downs Way in southern England \u2014 a long-distance trail known for its rolling chalk downland, wide skies and runnable/walkable paths. Covering 20\u201330km each session builds distance endurance steadily over time, month on month, rather than in one-off spikes, which is generally a safer way to build up to bigger challenges like the Three Peaks or Fan Dance."}, {"x": 65.5, "y": 28.0, "cat": "adventure", "title": "Passport", "meta": "Local & Wild Challenges", "body": "A stamp-card or app-based scheme that tracks participation across two categories of challenge: \u201cLocal\u201d (regular, nearby, lower-commitment rucks) and \u201cWild\u201d (more remote, adventurous outings further afield). It's a way of gamifying consistency \u2014 rewarding people for showing up regularly as well as for stepping outside their usual routes."}, {"x": 65.5, "y": 36.0, "cat": "adventure", "title": "Winter Bingo", "meta": "Sep \u2013 Feb", "body": "A seasonal challenge running from September through February \u2014 the darker, colder half of the year when motivation typically dips. It's structured as a bingo-style grid of activities or mini-goals to complete, turning the toughest months for outdoor training into a game with a clear finish line."}, {"x": 77.0, "y": 23.0, "cat": "future", "title": "2027 Digital Challenges", "meta": "", "body": "Planned online and app-based challenges arriving as part of future programming \u2014 letting people join, log and track progress remotely rather than only at in-person events, which should widen participation beyond whoever can make it to a physical meet-up."}, {"x": 77.0, "y": 34.0, "cat": "future", "title": "More Community Events", "meta": "", "body": "A commitment to keep growing the calendar of group meet-ups, rucks and social gatherings \u2014 recognising that the community and camaraderie side (the Community Line) is as central to the programme as the physical training."}, {"x": 77.0, "y": 40.0, "cat": "future", "title": "New Locations", "meta": "", "body": "Plans to expand Rucking Fitness into additional towns and regions, so more people have a local group and local routes to train with rather than needing to travel to existing hubs."}, {"x": 77.0, "y": 46.0, "cat": "future", "title": "Big Dreams Ahead\u2026", "meta": "", "body": "A deliberately open-ended marker on the roadmap \u2014 signalling that the mountains, events and programmes shown elsewhere on the hand are milestones along the way, not the final destination. The pinky finger as a whole represents everything still to come rather than what's already been achieved."}, {"x": 77.0, "y": 14.0, "cat": "future", "title": "500 Mile Challenge", "meta": "2027", "body": "A year-long 2027 challenge to clock up 500 cumulative miles of rucking and walking over the course of the year \u2014 logged session by session rather than in one attempt, so it rewards consistency over the long haul as much as any single big push."}, {"x": 15.0, "y": 37.0, "cat": "community", "title": "The Buzz Coffee Bar", "meta": "", "body": "A community meeting spot \u2014 the coffee bar where the group gathers before or after a ruck to warm up, refuel and catch up. It's a small but important part of the Community Line: the training brings people together, and spots like this are where the friendships actually happen."}, {"x": 11.0, "y": 44.0, "cat": "community", "title": "Ruck \u00b7 Gym \u00b7 Skip \u00b7 Eat \u00b7 Recover \u00b7 Grow", "meta": "The Core Cycle", "body": "The six-word cycle that underpins everything else on the hand: Ruck (load-bearing walks), Gym (strength training), Skip (rope-based cardio), Eat (nutrition to support the training), Recover (rest, sleep, mobility) and Grow (measurable progress over time). Every mountain, event and programme on the other four fingers is really just this cycle applied to a specific goal \u2014 it's the repeating weekly engine, not a one-off step."}, {"x": 15.0, "y": 57.5, "cat": "community", "title": "Same Team\u2026 Different Challenges", "meta": "", "body": "A statement of the programme's philosophy: everyone trains within the same cycle and the same community, shoulder to shoulder, but is working toward their own personal goals \u2014 whether that's weight loss, a first 10km ruck, or the Fan Dance. The team stays constant; the individual challenge is whatever's next for you."}, {"x": 45.0, "y": 45.3, "cat": "challenge", "title": "The Challenge Line", "meta": "Red", "body": "\u201cFrom first steps to mountain tops.\u201d This line traces the full arc of physical progression in the programme \u2014 starting with a beginner's first short ruck and building all the way up to the major summit challenges shown on the index finger (Ben Nevis, Snowdon, Scafell Pike, the Three Peaks). It's the backbone that everything else supports."}, {"x": 45.0, "y": 52.3, "cat": "community", "title": "The Community Line", "meta": "Green", "body": "\u201cReal people. Lasting friendships.\u201d This line represents the social fabric of the programme \u2014 the fact that training happens in a group, with the same faces showing up week after week, and that the relationships built along the way tend to outlast any single challenge or event."}, {"x": 45.0, "y": 60.3, "cat": "fitness", "title": "The Fitness Line", "meta": "Blue", "body": "\u201cStronger, fitter, healthier.\u201d This line covers the direct physical outcomes of the training \u2014 the strength, cardiovascular fitness and general health improvements that come from consistent rucking, gym work and the structured 12-week programmes shown on the middle finger."}, {"x": 45.0, "y": 68.0, "cat": "adventure", "title": "The Adventure Line", "meta": "Purple", "body": "\u201cNew places. Bigger goals.\u201d This line is about exploration \u2014 new routes, new trails, new locations, and progressively bigger ambitions, reflected in the events and challenges on the ring finger like the South Downs rucks and the Passport scheme."}, {"x": 45.0, "y": 75.5, "cat": "future", "title": "The Future Line", "meta": "Gold", "body": "\u201cMore challenges. More adventures. The best is yet to come.\u201d The final line looks forward rather than back \u2014 tying together everything on the pinky finger (digital challenges, new locations, more events) into the idea that the programme, and each person's journey through it, is still being written."}];
+
+  const colors = {
+    challenge: {hex:'#D9453B', label:'Challenge Line'},
+    community: {hex:'#3FA34D', label:'Community Line'},
+    fitness:   {hex:'#2F80C4', label:'Fitness Line'},
+    adventure: {hex:'#9354C9', label:'Adventure Line'},
+    future:    {hex:'#E0A82E', label:'Future Line'},
+  };
+
+  const stage = document.getElementById('stage');
+  const overlay = document.getElementById('overlay');
+  const card = document.getElementById('card');
+  const cardTag = document.getElementById('cardTag');
+  const cardTitle = document.getElementById('cardTitle');
+  const cardMeta = document.getElementById('cardMeta');
+  const cardBody = document.getElementById('cardBody');
+
+  hotspots.forEach(h => {
+    const btn = document.createElement('button');
+    btn.className = 'hotspot';
+    btn.style.left = h.x + '%';
+    btn.style.top = h.y + '%';
+    btn.style.setProperty('--dot-color', colors[h.cat].hex);
+    btn.setAttribute('aria-label', h.title);
+    btn.innerHTML = '<span class="ring"></span><span class="dot"></span>';
+    btn.addEventListener('click', () => openCard(h));
+    stage.appendChild(btn);
+  });
+
+  function openCard(h){
+    const c = colors[h.cat];
+    card.style.setProperty('--accent', c.hex);
+    cardTag.textContent = c.label;
+    cardTag.style.color = c.hex;
+    cardTitle.textContent = h.title;
+    cardMeta.textContent = h.meta || '';
+    cardMeta.style.display = h.meta ? 'block' : 'none';
+    cardBody.textContent = h.body;
+    overlay.classList.add('open');
+  }
+  function closeCard(){
+    overlay.classList.remove('open');
+  }
+  document.getElementById('cardClose').addEventListener('click', closeCard);
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) closeCard(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeCard(); });
+</script>
+</body>
+</html>
