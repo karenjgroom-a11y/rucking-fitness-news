@@ -25,3 +25,11 @@ You can either:
 
 `news.ruckingfitness.co.uk` can remain the permanent home for Rucking Fitness News.
 Issue 01 is Neil Neil's Mystic Peel; later issues can use different concepts without needing a new subdomain.
+
+## Issue 01 v1.1 update
+
+- Added the approved Rucking Fitness mountain/wordmark site icon and home-screen icons.
+- Fixed the malformed `DOCTYPE` that was appearing as text at the top of the page.
+- Enlarged the palm-reader presentation on mobile by reducing unused side margins.
+- Added a clear five-colour legend underneath the palm so the key remains readable on phones.
+- Preserved all 26 interactive hotspots and Issue 01 content.
