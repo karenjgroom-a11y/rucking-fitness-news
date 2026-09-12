@@ -208,30 +208,31 @@
     border-radius: 16px;
     margin-top: 18px;
   }
-    .legend-item{
-      padding:9px 3px;
-      font-size:9.5px;
-    }
-  }
-
-
   /* --- Large tappable line navigation --- */
   .line-nav{
-    display:grid;
-    grid-template-columns:repeat(5,minmax(0,1fr));
-    gap:10px;
-    margin:18px 2px 0;
+    display:flex;
+    flex-wrap:nowrap;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin:16px auto 0;
+    width:100%;
+    max-width:680px;
   }
 
   .line-nav-btn{
     appearance:none;
     -webkit-appearance:none;
-    border:2px solid rgba(255,255,255,0.88);
+    flex:0 1 104px;
+    width:min(104px,18vw);
+    height:min(104px,18vw);
+    max-width:104px;
+    max-height:104px;
+    min-width:54px;
+    min-height:54px;
+    border:2px solid rgba(255,255,255,.9);
     border-radius:50%;
-    aspect-ratio:1 / 1;
-    width:100%;
-    min-width:0;
-    padding:8px 4px;
+    padding:5px 2px;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -239,24 +240,21 @@
     text-align:center;
     color:#fff;
     font-family:'Anton',sans-serif;
-    font-size:clamp(10px,2.8vw,16px);
-    line-height:1.05;
-    letter-spacing:.01em;
+    font-size:clamp(8px,1.8vw,14px);
+    line-height:1.02;
+    letter-spacing:0;
     cursor:pointer;
-    box-shadow:0 6px 18px rgba(0,0,0,.24);
-    transition:transform .14s ease, filter .14s ease;
+    box-shadow:0 4px 12px rgba(0,0,0,.22);
+    overflow:hidden;
   }
 
   .line-nav-btn:active{ transform:scale(.96); }
-  .line-nav-btn:hover{ filter:brightness(1.06); }
-
   .line-nav-btn small{
     display:block;
     font-family:'Inter',sans-serif;
     font-size:.72em;
-    font-weight:700;
-    margin-top:3px;
-    letter-spacing:.02em;
+    font-weight:800;
+    margin-top:2px;
   }
 
   .line-challenge{ background:#D9453B; }
@@ -285,8 +283,15 @@
   }
 
   @media (max-width:520px){
-    .line-nav{ gap:5px; margin-left:0; margin-right:0; }
-    .line-nav-btn{ border-width:1.5px; padding:5px 2px; }
+    .line-nav{ gap:4px; padding:0 2px; }
+    .line-nav-btn{
+      width:17.5vw;
+      height:17.5vw;
+      min-width:50px;
+      min-height:50px;
+      border-width:1.5px;
+      font-size:clamp(7px,2.25vw,11px);
+    }
   }
 
 </style>

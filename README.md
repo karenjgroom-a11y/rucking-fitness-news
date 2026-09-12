@@ -42,3 +42,9 @@ Issue 01 is Neil Neil's Mystic Peel; later issues can use different concepts wit
 - Each large line button opens the corresponding existing line information from Neil's hotspot data using the same modal as the palm.
 - Enlarged the “26 TAPPABLE POINTS” message for mobile.
 - No individual hotspot copy or category data was removed or rewritten.
+
+## Issue 01 v1.2.1 hotfix
+
+- Fixed the five lower line buttons rendering at an enormous size.
+- Buttons are now explicitly size-capped and remain five compact circles in one row on mobile.
+- All 26 palm hotspots and all five lower line-button actions remain unchanged.
